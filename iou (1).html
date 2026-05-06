@@ -126,123 +126,210 @@ body {
   margin: 12px 16px 8px;
   background: var(--surface);
   border-radius: 14px;
-  padding: 18px 18px 16px;
   position: relative; overflow: hidden;
+  cursor: pointer;
+  transition: background .12s;
 }
+.dashboard:active { background: var(--fill-4); }
+.dash-head {
+  padding: 18px 20px 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.dash-head-text { flex: 1; min-width: 0; }
 .dash-label {
   font-size: 11px; font-weight: 600;
-  letter-spacing: 0.6px; text-transform: uppercase;
-  color: var(--label-3); margin-bottom: 10px;
-}
-.dash-net-row {
-  display: flex; align-items: baseline; justify-content: space-between;
-  margin-bottom: 16px; padding-bottom: 14px;
-  border-bottom: 0.5px solid var(--separator);
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--label-3); margin-bottom: 6px;
 }
 .dash-net {
-  font-size: 30px; font-weight: 700;
-  letter-spacing: -0.8px;
-  font-feature-settings: "tnum"; line-height: 1;
+  font-size: 36px; font-weight: 700;
+  letter-spacing: -1px; line-height: 1.05;
+  font-feature-settings: "tnum";
 }
 .dash-net.pos { color: var(--green); }
 .dash-net.neg { color: var(--red); }
 .dash-net.zero { color: var(--label); }
-.dash-net-label {
+.dash-sub {
   font-size: 13px; font-weight: 500;
   color: var(--label-2); letter-spacing: -0.08px;
-  text-align: right; line-height: 1.2;
+  margin-top: 4px;
 }
-.dash-net-label .small { display: block; font-size: 11px; color: var(--label-3); margin-top: 2px; }
+.dash-chev {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--fill-3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform .25s cubic-bezier(.32,.72,0,1);
+  color: var(--label-2);
+}
+.dashboard.expanded .dash-chev { transform: rotate(180deg); }
+.dash-chev svg { width: 12px; height: 12px; }
 
-.dash-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.dash-stat { min-width: 0; }
-.dash-stat-head {
-  font-size: 12px; font-weight: 600;
-  letter-spacing: -0.08px; color: var(--label-2);
-  display: flex; align-items: center; gap: 6px;
-  margin-bottom: 4px;
+.dash-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s cubic-bezier(.32,.72,0,1);
 }
-.dash-stat-head .pip { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.dash-stat-head .pip.in  { background: var(--red); }
-.dash-stat-head .pip.out { background: var(--green); }
-.dash-stat-amt {
-  font-size: 20px; font-weight: 700;
-  letter-spacing: -0.43px; color: var(--label);
+.dashboard.expanded .dash-body { max-height: 600px; }
+
+.dash-inner {
+  padding: 0 20px 16px;
+}
+.dash-divider {
+  height: 0.5px;
+  background: var(--separator);
+  margin: 0 0 14px;
+}
+
+.dash-stat-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 0;
+  font-size: 14px;
+}
+.dash-stat-row + .dash-stat-row { border-top: 0.5px solid var(--separator); }
+.dash-stat-row .dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.dash-stat-row .dot.green { background: var(--green); }
+.dash-stat-row .dot.red   { background: var(--red); }
+.dash-stat-row .label {
+  flex: 1; min-width: 0;
+  color: var(--label); font-weight: 500;
+  letter-spacing: -0.15px;
+}
+.dash-stat-row .label .small {
+  color: var(--label-3); font-weight: 400; margin-left: 4px;
+}
+.dash-stat-row .amount {
+  font-weight: 600; letter-spacing: -0.24px;
   font-feature-settings: "tnum";
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.dash-stat-sub {
-  font-size: 12px; color: var(--label-3);
-  margin-top: 2px; letter-spacing: -0.08px;
+  color: var(--label);
 }
 
-.dash-method-section {
-  margin-top: 14px; padding-top: 14px;
-  border-top: 0.5px solid var(--separator);
-}
-.dash-method-title {
+.dash-section-label {
   font-size: 11px; font-weight: 600;
   letter-spacing: 0.5px; text-transform: uppercase;
-  color: var(--label-3); margin-bottom: 10px;
+  color: var(--label-3);
+  margin: 14px 0 6px;
 }
-.dash-methods {
-  display: flex; flex-direction: column; gap: 6px;
-}
-.dash-method {
+
+.dash-cat-row {
   display: flex; align-items: center; gap: 10px;
-  font-size: 14px; letter-spacing: -0.15px;
+  padding: 8px 0;
+  font-size: 14px;
 }
-.dash-method-icon {
+.dash-cat-row + .dash-cat-row { border-top: 0.5px solid var(--separator); }
+.dash-cat-icon {
   width: 22px; height: 22px; border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
   font-size: 11px; font-weight: 700; color: white;
   flex-shrink: 0;
 }
-.dash-method-name { flex: 1; min-width: 0; color: var(--label); font-weight: 500; }
-.dash-method-amt {
-  font-weight: 600; font-feature-settings: "tnum";
-  color: var(--label-2);
+.dash-cat-name {
+  flex: 1; min-width: 0;
+  color: var(--label); font-weight: 500;
+  letter-spacing: -0.15px;
+}
+.dash-cat-amount {
+  font-weight: 600; letter-spacing: -0.24px;
+  font-feature-settings: "tnum";
 }
 
-/* ─── FILTER CHIPS ─── */
-.filter-row {
-  margin: 12px 0 4px;
-  padding: 0 16px;
-  display: flex; gap: 6px;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
+/* ─── FILTER ROW (button + active chip) ─── */
+.filter-bar {
+  margin: 14px 32px 0;
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 8px;
+  min-height: 28px;
 }
-.filter-row::-webkit-scrollbar { display: none; }
-.filter-chip {
-  flex-shrink: 0;
-  background: var(--surface);
-  border: 1px solid var(--separator);
-  color: var(--label);
-  font: inherit;
-  font-size: 13px; font-weight: 510;
-  letter-spacing: -0.08px;
-  padding: 7px 13px 7px 11px;
+.filter-active-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--label); color: white;
   border-radius: 100px;
+  padding: 5px 5px 5px 11px;
+  font-size: 12px; font-weight: 590;
+  letter-spacing: -0.08px;
+  border: none; cursor: pointer;
+}
+.filter-active-chip .filter-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.3);
+}
+.filter-active-chip .clear-x {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; line-height: 1;
+}
+.filter-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--fill-3); border: none; cursor: pointer;
+  border-radius: 100px;
+  padding: 5px 12px 5px 9px;
+  font: inherit; font-size: 12px; font-weight: 590;
+  letter-spacing: -0.08px;
+  color: var(--label-2);
+}
+.filter-btn:active { background: var(--fill-1); }
+.filter-btn svg { width: 12px; height: 12px; }
+
+/* ─── FILTER SHEET ─── */
+.filter-sheet-overlay {
+  position: fixed; inset: 0; z-index: 280;
+  background: rgba(0,0,0,0.4);
+  display: none; align-items: flex-end; justify-content: center;
+  opacity: 0; transition: opacity .3s;
+}
+.filter-sheet-overlay.open { display: flex; opacity: 1; }
+.filter-sheet {
+  width: 100%; max-width: 430px;
+  background: var(--bg);
+  border-radius: 14px 14px 0 0;
+  max-height: 80vh;
+  display: flex; flex-direction: column;
+  animation: sheetUp .35s cubic-bezier(.32,.72,0,1);
+  padding-bottom: var(--safe-bot);
+}
+.filter-sheet-body {
+  flex: 1; overflow-y: auto; padding: 0 0 24px;
+}
+.filter-list {
+  background: var(--surface);
+  margin: 8px 16px 0;
+  border-radius: 10px; overflow: hidden;
+}
+.filter-row-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  position: relative;
   cursor: pointer;
-  display: flex; align-items: center; gap: 6px;
-  transition: all .15s;
-  scroll-snap-align: start;
-  white-space: nowrap;
+  min-height: 44px;
+  background: var(--surface);
+  transition: background .12s;
 }
-.filter-chip:active { transform: scale(0.95); }
-.filter-chip .filter-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  flex-shrink: 0;
+.filter-row-item:active { background: var(--fill-4); }
+.filter-row-item + .filter-row-item::before {
+  content: '';
+  position: absolute; top: 0; left: 16px; right: 0;
+  height: 0.5px; background: var(--separator);
 }
-.filter-chip.active {
-  background: var(--label);
-  color: white;
-  border-color: var(--label);
+.filter-row-item .row-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
 }
-.filter-chip.active .filter-dot { box-shadow: 0 0 0 1.5px rgba(255,255,255,0.3); }
-.filter-row::after {
-  content: ''; flex-shrink: 0; width: 4px;
+.filter-row-item .row-label {
+  flex: 1; min-width: 0;
+  font-size: 16px; letter-spacing: -0.43px;
+  color: var(--label);
+}
+.filter-row-item .row-check {
+  color: var(--blue);
+  font-size: 17px; font-weight: 600;
+}
+.filter-section-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--label-3);
+  padding: 18px 32px 6px;
 }
 
 /* ─── SECTION HEADERS ─── */
@@ -304,11 +391,14 @@ body {
 .card-sub {
   font-size: 13.5px; font-weight: 400;
   letter-spacing: -0.15px; line-height: 1.3;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   display: flex; align-items: center; gap: 6px;
+  flex-wrap: wrap;
 }
 .card.light .card-sub { color: var(--label-2); }
 .card.dark  .card-sub { color: var(--black-card-sub); }
+.card-sub .text-bit {
+  white-space: nowrap;
+}
 
 .method-pill {
   display: inline-flex; align-items: center; gap: 4px;
@@ -756,10 +846,23 @@ body {
 </div>
 
 <!-- DASHBOARD -->
-<div class="dashboard" id="dashboard"></div>
+<div class="dashboard" id="dashboard" onclick="toggleDashboard()"></div>
 
-<!-- FILTERS -->
-<div class="filter-row" id="filterRow"></div>
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filterBar"></div>
+
+<!-- FILTER SHEET -->
+<div class="filter-sheet-overlay" id="filterSheetOverlay" onclick="bgFilterClick(event)">
+  <div class="filter-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-nav">
+      <div></div>
+      <div class="sheet-title">Filter</div>
+      <button class="sheet-btn bold" onclick="closeFilterSheet()">Done</button>
+    </div>
+    <div class="filter-sheet-body" id="filterSheetBody"></div>
+  </div>
+</div>
 
 <!-- PENDING -->
 <div class="section-header" id="pendingHeader">
@@ -999,20 +1102,67 @@ function applyFilter(arr) {
 }
 function setFilter(id) {
   activeFilter = id;
-  renderFilters();
+  renderFilterBar();
+  closeFilterSheet();
   render();
 }
-function renderFilters() {
-  const row = document.getElementById('filterRow');
-  const chips = [
-    ...STATUS_FILTERS,
-    ...METHODS.map(m => ({id:m.id, label:m.label, color:m.color}))
-  ];
-  row.innerHTML = chips.map(c => {
-    const isActive = c.id === activeFilter;
-    const dot = c.color ? `<span class="filter-dot" style="background:${c.color}"></span>` : '';
-    return `<button class="filter-chip ${isActive?'active':''}" onclick="setFilter('${c.id}')">${dot}${c.label}</button>`;
-  }).join('');
+function clearFilter() {
+  activeFilter = 'all';
+  renderFilterBar();
+  render();
+}
+
+function renderFilterBar() {
+  const bar = document.getElementById('filterBar');
+  if (activeFilter === 'all') {
+    bar.innerHTML = `<button class="filter-btn" onclick="openFilterSheet()">
+      <svg viewBox="0 0 12 12" fill="none">
+        <path d="M1 2.5h10M2.5 6h7M4.5 9.5h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Filter
+    </button>`;
+  } else {
+    const f = getActiveFilter();
+    const dot = f.color ? `<span class="filter-dot" style="background:${f.color}"></span>` : '';
+    bar.innerHTML = `<button class="filter-active-chip" onclick="openFilterSheet()">
+      ${dot}${escapeHtml(f.label)}
+      <span class="clear-x" onclick="event.stopPropagation();clearFilter()">✕</span>
+    </button>`;
+  }
+}
+
+function openFilterSheet() {
+  renderFilterSheet();
+  document.getElementById('filterSheetOverlay').classList.add('open');
+}
+function closeFilterSheet() {
+  document.getElementById('filterSheetOverlay').classList.remove('open');
+}
+function bgFilterClick(e) {
+  if (e.target.id === 'filterSheetOverlay') closeFilterSheet();
+}
+
+function renderFilterSheet() {
+  const body = document.getElementById('filterSheetBody');
+  const rowFor = (item) => {
+    const isActive = activeFilter === item.id;
+    const dot = item.color ? `<span class="row-dot" style="background:${item.color}"></span>` : `<span class="row-dot" style="background:var(--label-3)"></span>`;
+    const check = isActive ? `<span class="row-check">✓</span>` : '';
+    return `<div class="filter-row-item" onclick="setFilter('${item.id}')">${dot}<span class="row-label">${escapeHtml(item.label)}</span>${check}</div>`;
+  };
+  body.innerHTML = `
+    <div class="filter-list">
+      ${rowFor(STATUS_FILTERS[0])}
+    </div>
+    <div class="filter-section-label">Status</div>
+    <div class="filter-list">
+      ${STATUS_FILTERS.slice(1).map(rowFor).join('')}
+    </div>
+    <div class="filter-section-label">Payment Method</div>
+    <div class="filter-list">
+      ${METHODS.map(m => rowFor({id:m.id, label:m.label, color:m.color})).join('')}
+    </div>
+  `;
 }
 
 // ════════════════════════════
@@ -1577,6 +1727,15 @@ function initSwipe(wrap) {
 // ════════════════════════════
 //  DASHBOARD
 // ════════════════════════════
+// ════════════════════════════
+//  DASHBOARD (collapsible)
+// ════════════════════════════
+let dashExpanded = false;
+function toggleDashboard() {
+  dashExpanded = !dashExpanded;
+  document.getElementById('dashboard').classList.toggle('expanded', dashExpanded);
+}
+
 function renderDashboard(pending) {
   const dash = document.getElementById('dashboard');
   const inAmt  = pending.filter(r => isOwesMe(r.type)).reduce((s,r) => s+r.amount, 0);
@@ -1585,48 +1744,19 @@ function renderDashboard(pending) {
   const inCount  = pending.filter(r => isOwesMe(r.type)).length;
   const outCount = pending.filter(r => !isOwesMe(r.type)).length;
 
-  const methodMap = {};
-  pending.forEach(r => {
-    if (!r.method) return;
-    if (!methodMap[r.method]) methodMap[r.method] = {in:0, out:0};
-    if (isOwesMe(r.type)) methodMap[r.method].in += r.amount;
-    else methodMap[r.method].out += r.amount;
-  });
-  const methodKeys = Object.keys(methodMap).sort((a,b) => {
-    return (methodMap[b].in + methodMap[b].out) - (methodMap[a].in + methodMap[a].out);
-  });
-
   let netClass = 'zero';
   let netLabel = 'You\'re even';
   if (net > 0) { netClass = 'pos'; netLabel = 'Owed to you, net'; }
   else if (net < 0) { netClass = 'neg'; netLabel = 'You owe, net'; }
 
   const netSign = net < 0 ? '−' : (net > 0 ? '+' : '');
+
   const scopeLabel = activeTab === 'all' ? 'All Pending'
                    : activeTab === 'business' ? 'Business Pending'
                    : 'Personal Pending';
 
-  let html = `
-    <div class="dash-label">${scopeLabel}</div>
-    <div class="dash-net-row">
-      <div class="dash-net ${netClass}">${netSign}${$m(Math.abs(net))}</div>
-      <div class="dash-net-label">${netLabel}<span class="small">${pending.length} ${pending.length===1?'entry':'entries'}</span></div>
-    </div>
-    <div class="dash-split">
-      <div class="dash-stat">
-        <div class="dash-stat-head"><span class="pip in"></span>Owed to you</div>
-        <div class="dash-stat-amt">${$m(inAmt)}</div>
-        <div class="dash-stat-sub">${inCount} ${inCount===1?'person':'people'}</div>
-      </div>
-      <div class="dash-stat">
-        <div class="dash-stat-head"><span class="pip out"></span>You owe</div>
-        <div class="dash-stat-amt">${$m(outAmt)}</div>
-        <div class="dash-stat-sub">${outCount} ${outCount===1?'person':'people'}</div>
-      </div>
-    </div>
-  `;
-
-  // In All mode, show a Personal vs Business breakdown of pending net
+  // Optional category section in expanded view (only in All)
+  let categoryHtml = '';
   if (activeTab === 'all') {
     const personalPending = pending.filter(r => r._source === 'personal');
     const businessPending = pending.filter(r => r._source === 'business');
@@ -1634,46 +1764,83 @@ function renderDashboard(pending) {
                - personalPending.filter(r => !isOwesMe(r.type)).reduce((s,r)=>s+r.amount,0);
     const bNet = businessPending.filter(r => isOwesMe(r.type)).reduce((s,r)=>s+r.amount,0)
                - businessPending.filter(r => !isOwesMe(r.type)).reduce((s,r)=>s+r.amount,0);
-    const fmtNet = (n) => (n < 0 ? '−' : '') + $m(Math.abs(n));
+    const fmtNet = (n) => (n < 0 ? '−' : n > 0 ? '+' : '') + $m(Math.abs(n));
     const colorOf = (n) => n > 0 ? 'var(--green)' : n < 0 ? 'var(--red)' : 'var(--label)';
-    html += `<div class="dash-method-section">
-      <div class="dash-method-title">By Category</div>
-      <div class="dash-methods">
-        <div class="dash-method">
-          <div class="dash-method-icon" style="background:var(--blue)">P</div>
-          <div class="dash-method-name">Personal <span style="color:var(--label-3);font-weight:400;">· ${personalPending.length}</span></div>
-          <div class="dash-method-amt" style="color:${colorOf(pNet)}">${fmtNet(pNet)}</div>
-        </div>
-        <div class="dash-method">
-          <div class="dash-method-icon" style="background:var(--brown)">B</div>
-          <div class="dash-method-name">Business <span style="color:var(--label-3);font-weight:400;">· ${businessPending.length}</span></div>
-          <div class="dash-method-amt" style="color:${colorOf(bNet)}">${fmtNet(bNet)}</div>
-        </div>
-      </div>
-    </div>`;
+    const rows = [];
+    if (personalPending.length) {
+      rows.push(`<div class="dash-cat-row">
+        <div class="dash-cat-icon" style="background:var(--blue)">P</div>
+        <div class="dash-cat-name">Personal <span style="color:var(--label-3);font-weight:400;">· ${personalPending.length}</span></div>
+        <div class="dash-cat-amount" style="color:${colorOf(pNet)}">${fmtNet(pNet)}</div>
+      </div>`);
+    }
+    if (businessPending.length) {
+      rows.push(`<div class="dash-cat-row">
+        <div class="dash-cat-icon" style="background:var(--brown)">B</div>
+        <div class="dash-cat-name">Business <span style="color:var(--label-3);font-weight:400;">· ${businessPending.length}</span></div>
+        <div class="dash-cat-amount" style="color:${colorOf(bNet)}">${fmtNet(bNet)}</div>
+      </div>`);
+    }
+    if (rows.length) {
+      categoryHtml = `<div class="dash-section-label">By Category</div>${rows.join('')}`;
+    }
   }
 
+  // Optional method section
+  const methodMap = {};
+  pending.forEach(r => {
+    if (!r.method) return;
+    if (!methodMap[r.method]) methodMap[r.method] = 0;
+    methodMap[r.method] += r.amount;
+  });
+  const methodKeys = Object.keys(methodMap).sort((a,b) => methodMap[b] - methodMap[a]);
+  let methodHtml = '';
   if (methodKeys.length) {
-    html += `<div class="dash-method-section">
-      <div class="dash-method-title">By Payment Method</div>
-      <div class="dash-methods">
-        ${methodKeys.map(k => {
-          const m = methodById(k);
-          if (!m) return '';
-          const total = methodMap[k].in + methodMap[k].out;
-          const customIcon = methodIcon(k);
-          const inner = customIcon ? customIcon : (m.short || '•');
-          return `<div class="dash-method">
-            <div class="dash-method-icon" style="background:${m.color}">${inner}</div>
-            <div class="dash-method-name">${m.label}</div>
-            <div class="dash-method-amt">${$m(total)}</div>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
+    methodHtml = `<div class="dash-section-label">By Method</div>${methodKeys.map(k => {
+      const m = methodById(k);
+      if (!m) return '';
+      const customIcon = methodIcon(k);
+      const inner = customIcon ? customIcon : (m.short || '•');
+      return `<div class="dash-cat-row">
+        <div class="dash-cat-icon" style="background:${m.color}">${inner}</div>
+        <div class="dash-cat-name">${m.label}</div>
+        <div class="dash-cat-amount" style="color:var(--label)">${$m(methodMap[k])}</div>
+      </div>`;
+    }).join('')}`;
   }
 
-  dash.innerHTML = html;
+  dash.innerHTML = `
+    <div class="dash-head">
+      <div class="dash-head-text">
+        <div class="dash-label">${scopeLabel}</div>
+        <div class="dash-net ${netClass}">${netSign}${$m(Math.abs(net))}</div>
+        <div class="dash-sub">${netLabel} · ${pending.length} ${pending.length===1?'entry':'entries'}</div>
+      </div>
+      <div class="dash-chev">
+        <svg viewBox="0 0 12 12" fill="none">
+          <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="dash-body">
+      <div class="dash-inner">
+        <div class="dash-divider"></div>
+        <div class="dash-stat-row">
+          <span class="dot red"></span>
+          <span class="label">Owed to you<span class="small">${inCount} ${inCount===1?'person':'people'}</span></span>
+          <span class="amount">${$m(inAmt)}</span>
+        </div>
+        <div class="dash-stat-row">
+          <span class="dot green"></span>
+          <span class="label">You owe<span class="small">${outCount} ${outCount===1?'person':'people'}</span></span>
+          <span class="amount">${$m(outAmt)}</span>
+        </div>
+        ${categoryHtml}
+        ${methodHtml}
+      </div>
+    </div>
+  `;
+  dash.classList.toggle('expanded', dashExpanded);
 }
 
 // ════════════════════════════
@@ -1762,22 +1929,25 @@ function statusPillHtml(r) {
 function cardHtml(r, realIdx, isCompletedCard) {
   const isIn = isOwesMe(r.type);
   const cardVariant = isIn ? 'light' : 'dark';
-  const noteFirst = r.note ? r.note.split('|||')[0] : '';
+  const note = r.note ? r.note.split('|||')[0] : '';
   const dateText = isCompletedCard
     ? (isPaid(r) ? `Paid ${fmtD(r.dateSettled)}` : (isDeleted(r) ? 'Removed' : ''))
     : fmtD(r.date);
   const sourcePill  = sourcePillHtml(r._source);
   const statusPill  = isCompletedCard ? statusPillHtml(r) : '';
-  // Show method pill: always when set (so user can see method for pending Venmo entries too,
-  // and on paid entries it doubles as the paid-via marker)
-  const methodPill  = isDeleted(r) ? '' : methodPillHtml(r.method);
-  const subBits = [noteFirst, dateText].filter(Boolean).join(' · ');
-  const tagText = isIn ? 'Owes you' : 'You owe';
+  const methodLabel = (r.method && !isDeleted(r)) ? (methodById(r.method)?.label || '') : '';
+
+  // Build subtitle parts: pills first (status + source), then text (note · method · date)
+  const textParts = [];
+  if (note) textParts.push(`<span class="text-bit">${escapeHtml(note)}</span>`);
+  if (methodLabel && !isCompletedCard) textParts.push(`<span class="text-bit">${escapeHtml(methodLabel)}</span>`);
+  if (dateText) textParts.push(`<span class="text-bit">${escapeHtml(dateText)}</span>`);
+  const textJoined = textParts.join(`<span class="text-bit" style="opacity:0.5;">·</span>`);
+
   const amtColor = moneyColor(isIn, isCompletedCard);
   const onClickHandler = isCompletedCard ? `openCompletedAction(${realIdx})` : `openAction(${realIdx})`;
-  // Swipe action: pending → soft-delete; completed → permanent delete (with confirm)
   const action = isCompletedCard ? 'purge' : 'softDelete';
-  const swipeLabel = isCompletedCard ? 'Delete' : 'Delete';
+  const swipeLabel = 'Delete';
   const swipeBg    = isCompletedCard ? 'purge-bg' : 'delete-bg';
 
   return `<div class="card-wrap" data-real-idx="${realIdx}" data-swipe-action="${action}">
@@ -1786,11 +1956,10 @@ function cardHtml(r, realIdx, isCompletedCard) {
       <div class="avatar" style="background:${avatarColor(r.person)}">${initials(r.person)}</div>
       <div class="card-text">
         <div class="card-title">${escapeHtml(r.person)}</div>
-        <div class="card-sub">${statusPill}${sourcePill}${methodPill}${subBits ? `<span>${escapeHtml(subBits)}</span>` : ''}</div>
+        <div class="card-sub">${statusPill}${sourcePill}${textJoined}</div>
       </div>
       <div class="card-right">
         <div class="card-amount ${amtColor}">${$m(r.amount)}</div>
-        <div class="card-tag">${tagText}</div>
       </div>
     </div>
   </div>`;
@@ -1935,7 +2104,7 @@ syncBtn.addEventListener('touchmove',  () => clearTimeout(pillPress));
 // ════════════════════════════
 //  INIT
 // ════════════════════════════
-renderFilters();
+renderFilterBar();
 switchTab(activeTab);
 if (SCRIPT_URL) syncSheet();
 </script>
