@@ -13,7 +13,6 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
 :root {
-  /* iOS System Colors (Light Mode) */
   --bg:           #F2F2F7;
   --surface:      #FFFFFF;
   --surface-2:    #F2F2F7;
@@ -22,7 +21,6 @@
   --label:        #000000;
   --label-2:      rgba(60,60,67,0.6);
   --label-3:      rgba(60,60,67,0.3);
-  --label-4:      rgba(60,60,67,0.18);
 
   --blue:    #007AFF;
   --green:   #34C759;
@@ -32,12 +30,10 @@
   --purple:  #AF52DE;
   --pink:    #FF2D55;
   --teal:    #5AC8FA;
-  --yellow:  #FFCC00;
   --brown:   #A2845E;
 
   --gray:    #8E8E93;
   --gray-3:  #C7C7CC;
-  --gray-5:  #E5E5EA;
 
   --fill-1:  rgba(120,120,128,0.2);
   --fill-3:  rgba(118,118,128,0.12);
@@ -64,7 +60,7 @@ body {
 }
 ::-webkit-scrollbar { width:0; height:0; }
 
-/* ════════════════════ NAV / LARGE TITLE ════════════════════ */
+/* NAV */
 .nav { padding: calc(var(--safe-top) + 8px) 20px 16px; background: var(--bg); }
 .nav-row {
   display: flex; align-items: center; justify-content: space-between;
@@ -81,7 +77,6 @@ body {
 }
 .icon-btn:active { background: var(--fill-1); transform: scale(0.92); }
 .icon-btn svg { width: 17px; height: 17px; }
-
 .sync-chip {
   display: flex; align-items: center; gap: 6px;
   height: 28px; padding: 0 11px 0 9px;
@@ -109,7 +104,7 @@ body {
   margin-top: 2px;
 }
 
-/* ════════════════════ BALANCE CARD ════════════════════ */
+/* BALANCE */
 .balance-card {
   margin: 8px 16px 20px;
   background: var(--surface);
@@ -130,7 +125,6 @@ body {
 }
 .bal-amount.pos { color: var(--green); }
 .bal-amount.neg { color: var(--red); }
-
 .bal-breakdown {
   display: flex; gap: 18px;
   margin-top: 16px; padding-top: 14px;
@@ -142,9 +136,7 @@ body {
   color: var(--label-2); letter-spacing: -0.08px;
   display: flex; align-items: center; gap: 5px;
 }
-.bal-stat-label .dot {
-  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
-}
+.bal-stat-label .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 .bal-stat-label .dot.green { background: var(--green); }
 .bal-stat-label .dot.red   { background: var(--red); }
 .bal-stat-value {
@@ -154,30 +146,25 @@ body {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-/* ════════════════════ GROUPED LIST ════════════════════ */
+/* LIST */
 .section-header {
   font-size: 13px; font-weight: 400;
   letter-spacing: -0.08px; color: var(--label-2);
   text-transform: uppercase;
-  padding: 8px 32px 6px;
-  margin-top: 16px;
+  padding: 8px 32px 6px; margin-top: 16px;
 }
-
 .list {
   background: var(--surface);
   border-radius: 10px;
   margin: 0 16px;
   overflow: hidden;
 }
-
 .cell-wrap { position: relative; overflow: hidden; }
 .cell-wrap + .cell-wrap::before {
   content: '';
   position: absolute; top: 0; left: 60px; right: 0;
-  height: 0.5px; background: var(--separator);
-  z-index: 1;
+  height: 0.5px; background: var(--separator); z-index: 1;
 }
-
 .cell {
   position: relative; z-index: 2;
   background: var(--surface);
@@ -227,7 +214,6 @@ body {
   font-size: 12px; font-weight: 500;
   color: var(--label-3); letter-spacing: -0.08px;
 }
-
 .chevron {
   width: 7px; height: 12px; flex-shrink: 0;
   margin-left: 2px; color: var(--label-3);
@@ -257,18 +243,10 @@ body {
   color: var(--label-3);
 }
 .empty-glyph svg { width: 28px; height: 28px; }
-.empty-title {
-  font-size: 17px; font-weight: 600;
-  letter-spacing: -0.43px; color: var(--label);
-  margin-bottom: 4px;
-}
-.empty-sub {
-  font-size: 14px; font-weight: 400;
-  color: var(--label-2); letter-spacing: -0.15px;
-  line-height: 1.4;
-}
+.empty-title { font-size: 17px; font-weight: 600; letter-spacing: -0.43px; color: var(--label); margin-bottom: 4px; }
+.empty-sub { font-size: 14px; font-weight: 400; color: var(--label-2); letter-spacing: -0.15px; line-height: 1.4; }
 
-/* ════════════════════ FAB ════════════════════ */
+/* FAB */
 .fab {
   position: fixed;
   bottom: calc(28px + var(--safe-bot));
@@ -286,7 +264,7 @@ body {
 .fab svg { width: 22px; height: 22px; }
 @media (max-width: 462px) { .fab { right: 22px; margin-right: 0; } }
 
-/* ════════════════════ TOAST ════════════════════ */
+/* TOAST */
 .toast {
   position: fixed;
   top: calc(var(--safe-top) + 70px);
@@ -304,7 +282,7 @@ body {
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ════════════════════ ACTION SHEET ════════════════════ */
+/* ACTION SHEET */
 .action-overlay {
   position: fixed; inset: 0; z-index: 300;
   background: rgba(0,0,0,0.4);
@@ -360,7 +338,7 @@ body {
 }
 .action-cancel:active { background: rgba(255,255,255,0.7); }
 
-/* ════════════════════ NEW ENTRY SHEET ════════════════════ */
+/* FORM SHEET */
 .sheet-overlay {
   position: fixed; inset: 0; z-index: 250;
   background: rgba(0,0,0,0.4);
@@ -386,8 +364,7 @@ body {
 }
 .sheet-nav {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 16px;
-  flex-shrink: 0;
+  padding: 10px 16px; flex-shrink: 0;
 }
 .sheet-btn {
   background: none; border: none; cursor: pointer;
@@ -403,13 +380,12 @@ body {
 }
 .sheet-body { flex: 1; overflow-y: auto; padding: 8px 0 32px; }
 
-/* SEGMENTED CONTROL */
+/* SEGMENTED */
 .segmented {
   margin: 8px 16px 16px;
   background: var(--fill-3); border-radius: 9px;
   padding: 2px;
   display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
-  position: relative;
 }
 .seg-btn {
   background: transparent; border: none;
@@ -419,13 +395,9 @@ body {
   padding: 8px 12px;
   border-radius: 7px; cursor: pointer;
   transition: all .25s cubic-bezier(.32,.72,0,1);
-  position: relative; z-index: 1;
   display: flex; align-items: center; justify-content: center; gap: 5px;
 }
-.seg-btn .seg-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  flex-shrink: 0;
-}
+.seg-btn .seg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .seg-btn:nth-child(1) .seg-dot { background: var(--green); }
 .seg-btn:nth-child(2) .seg-dot { background: var(--red); }
 .seg-btn.active {
@@ -463,16 +435,12 @@ body {
   min-width: 0;
 }
 .form-input::placeholder { color: var(--label-3); }
-.form-input[type="date"] {
-  text-align: right; color: var(--blue); font-weight: 400;
-}
+.form-input[type="date"] { text-align: right; color: var(--blue); font-weight: 400; }
 .dollar-prefix {
   color: var(--label-3); font-size: 17px;
   letter-spacing: -0.43px; margin-left: auto;
 }
-.dollar-prefix + .form-input {
-  flex: 0 1 auto; max-width: 65%; margin-left: 4px;
-}
+.dollar-prefix + .form-input { flex: 0 1 auto; max-width: 65%; margin-left: 4px; }
 .note-input {
   width: 100%; border: none; background: transparent; outline: none;
   font: inherit; font-size: 17px;
@@ -482,7 +450,7 @@ body {
 }
 .note-input::placeholder { color: var(--label-3); }
 
-/* ════════════════════ HISTORY SHEET ════════════════════ */
+/* HISTORY */
 .hist-overlay {
   position: fixed; inset: 0; z-index: 240;
   background: rgba(0,0,0,0.4);
@@ -525,12 +493,11 @@ body {
 .hist-icon.settled  { background: var(--blue); }
 .hist-icon.reopened { background: var(--orange); }
 .hist-icon.deleted  { background: var(--red); }
-.hist-icon.undone   { background: var(--purple); }
+.hist-icon.edited   { background: var(--purple); }
 .hist-content { flex: 1; min-width: 0; }
 .hist-action-text {
   font-size: 15px; font-weight: 500;
   letter-spacing: -0.24px; color: var(--label);
-  line-height: 1.3;
 }
 .hist-detail {
   font-size: 13px; color: var(--label-2);
@@ -633,11 +600,12 @@ body {
 
 <div class="toast" id="toast"></div>
 
-<!-- ENTRY ACTION SHEET -->
+<!-- ENTRY ACTIONS -->
 <div class="action-overlay" id="actionOverlay" onclick="bgActionClick(event)">
   <div class="action-stack">
     <div class="action-card">
       <div class="action-title" id="actionTitle"></div>
+      <button class="action-btn" onclick="actionEdit()">Edit</button>
       <button class="action-btn bold" id="actionPaid" onclick="actionPaid()"></button>
       <button class="action-btn destructive" onclick="actionDelete()">Delete</button>
     </div>
@@ -659,22 +627,22 @@ body {
   </div>
 </div>
 
-<!-- ADD SHEET -->
+<!-- ADD / EDIT SHEET -->
 <div class="sheet-overlay" id="sheetOverlay">
   <div class="sheet">
     <div class="sheet-handle"></div>
     <div class="sheet-nav">
       <button class="sheet-btn" onclick="closeSheet()">Cancel</button>
-      <div class="sheet-title">New Entry</div>
+      <div class="sheet-title" id="sheetTitle">New Entry</div>
       <button class="sheet-btn bold" id="saveBtn" onclick="doSave()">Add</button>
     </div>
     <div class="sheet-body">
       <div class="segmented" role="tablist">
         <button class="seg-btn active" id="segIn" onclick="pickType('in')">
-          <span class="seg-dot"></span>Owes Me
+          <span class="seg-dot"></span>Owes me
         </button>
         <button class="seg-btn" id="segOut" onclick="pickType('out')">
-          <span class="seg-dot"></span>I Owe
+          <span class="seg-dot"></span>I owe them
         </button>
       </div>
       <div class="form-list">
@@ -716,7 +684,7 @@ body {
 <div class="setup-overlay" id="setupOverlay">
   <div class="setup-box">
     <div class="setup-title">Connect to Google Sheet</div>
-    <div class="setup-sub">Paste your Apps Script Web App URL.<br>Tap Skip to use offline only.</div>
+    <div class="setup-sub">Paste your Apps Script Web App URL.</div>
     <input class="setup-input" id="setupUrl" placeholder="https://script.google.com/macros/...">
     <div class="setup-btns">
       <button class="setup-btn secondary" onclick="setupSkip()">Skip</button>
@@ -733,12 +701,30 @@ const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzYAGV73sraf
 let SCRIPT_URL = localStorage.getItem('tab_script_url') || DEFAULT_SCRIPT_URL;
 
 // ════════════════════════════
+//  TYPE HELPERS — flexible matching
+//  Recognizes: "Owes me", "owes me", "Money in", "Money In"
+//  Recognizes: "I owe them", "i owe", "Money out"
+// ════════════════════════════
+function isOwesMe(type) {
+  const t = String(type || '').toLowerCase().trim();
+  if (!t) return false;
+  if (t.includes('owes me') || t.includes('owe me')) return true;
+  if (t === 'money in' || t.startsWith('money in')) return true;
+  if (t.includes('in') && !t.includes('owe') && !t.includes('out')) return true;
+  return false;
+}
+function canonicalType(direction) {
+  return direction === 'in' ? 'Owes me' : 'I owe them';
+}
+
+// ════════════════════════════
 //  STATE
 // ════════════════════════════
 let rows    = JSON.parse(localStorage.getItem('tab_rows') || '[]');
 let histLog = JSON.parse(localStorage.getItem('tab_hist') || '[]');
 let actionRowIdx  = null;
 let confirmRowIdx = null;
+let editingRowIdx = null; // null = adding new, otherwise = index in rows[]
 
 function flushRows() { localStorage.setItem('tab_rows', JSON.stringify(rows)); }
 function flushHist() { localStorage.setItem('tab_hist', JSON.stringify(histLog)); }
@@ -751,9 +737,20 @@ function $m(n) {
   return '$'+Number(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 }
 function fmtD(s) {
-  if(!s) return '';
+  if (!s) return '';
   try {
-    const d = new Date(s.includes('-') ? s+'T00:00:00' : s.replace(/(\d+)\/(\d+)\/(\d+)/, '$3-$1-$2'));
+    let d;
+    if (s instanceof Date) {
+      d = s;
+    } else if (typeof s === 'string' && s.includes('-')) {
+      d = new Date(s + 'T00:00:00');
+    } else if (typeof s === 'string' && s.includes('/')) {
+      const [m, day, y] = s.split('/');
+      d = new Date(parseInt(y), parseInt(m)-1, parseInt(day));
+    } else {
+      d = new Date(s);
+    }
+    if (isNaN(d.getTime())) return '';
     const now = new Date();
     const sameYear = d.getFullYear() === now.getFullYear();
     const dayMs = 86400000;
@@ -766,7 +763,17 @@ function fmtD(s) {
     return d.toLocaleDateString('en-US', sameYear
       ? {month:'short',day:'numeric'}
       : {month:'short',day:'numeric',year:'numeric'});
-  } catch { return s; }
+  } catch { return ''; }
+}
+// Convert sheet date string ("M/d/yyyy") to ISO ("yyyy-MM-dd") for the date picker
+function toISODate(s) {
+  if (!s) return todayISO();
+  if (typeof s === 'string' && s.match(/^\d{4}-\d{2}-\d{2}$/)) return s;
+  if (typeof s === 'string' && s.includes('/')) {
+    const [m, d, y] = s.split('/');
+    return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+  return todayISO();
 }
 function escapeHtml(s) {
   return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -836,12 +843,25 @@ async function syncSheet() {
     showToast('Sync failed');
   }
 }
+
+// Send order: [type, date, person, note, amount, status, dateSettled]
 async function writeRow(r) {
   if (!SCRIPT_URL) return false;
   try {
     const res = await fetch(SCRIPT_URL, {
       method: 'POST',
-      body: JSON.stringify({action:'append', row:[r.type, r.person, r.date, r.note, r.amount, r.status, r.dateSettled]})
+      body: JSON.stringify({action:'append', row:[r.type, r.date, r.person, r.note, r.amount, r.status, r.dateSettled]})
+    });
+    return (await res.json()).success;
+  } catch { return false; }
+}
+// Edit: [type, date, person, note, amount]
+async function editRowOnSheet(rowIndex, r) {
+  if (!SCRIPT_URL || !rowIndex) return false;
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({action:'update_row', rowIndex, row:[r.type, r.date, r.person, r.note, r.amount]})
     });
     return (await res.json()).success;
   } catch { return false; }
@@ -895,15 +915,15 @@ function openHistory() {
         </svg>
       </div>
       <div class="empty-title">No activity yet</div>
-      <div class="empty-sub">Add, settle, or delete entries to see your history.</div>
+      <div class="empty-sub">Add, edit, settle, or delete entries to see history.</div>
     </div>`;
   } else {
     const meta = {
       added:    {label:'Added',    icon:'+', cls:'added'},
+      edited:   {label:'Edited',   icon:'✎', cls:'edited'},
       settled:  {label:'Settled',  icon:'✓', cls:'settled'},
       reopened: {label:'Reopened', icon:'↻', cls:'reopened'},
-      deleted:  {label:'Deleted',  icon:'×', cls:'deleted'},
-      undone:   {label:'Restored', icon:'↩', cls:'undone'}
+      deleted:  {label:'Deleted',  icon:'×', cls:'deleted'}
     };
     body.innerHTML = `<div class="hist-list">${histLog.map(h => {
       const m = meta[h.action] || {label:'Activity', icon:'•', cls:'added'};
@@ -934,7 +954,7 @@ function openAction(realIdx) {
   const r = rows[realIdx];
   if (!r) return;
   const isSettled = r.status === 'Settled';
-  const isIn = r.type === 'Owes Me';
+  const isIn = isOwesMe(r.type);
   const noteFirst = r.note ? r.note.split('|||')[0] : '';
   document.getElementById('actionTitle').innerHTML =
     `<strong>${escapeHtml(r.person)}</strong>${(isIn?'+':'−')}${$m(r.amount)}${noteFirst ? ' · '+escapeHtml(noteFirst) : ''}`;
@@ -949,6 +969,12 @@ function closeAction() {
 }
 function bgActionClick(e) { if (e.target.id === 'actionOverlay') closeAction(); }
 
+function actionEdit() {
+  const idx = actionRowIdx;
+  closeAction();
+  if (idx === null) return;
+  openSheet(idx);
+}
 async function actionPaid() {
   const idx = actionRowIdx;
   closeAction();
@@ -1024,11 +1050,8 @@ function initSwipe(wrap) {
   function onEnd() {
     if (!dragging) return; dragging = false;
     cell.classList.add('animating');
-    if (Math.abs(curX) > MAX*0.5) {
-      cell.style.transform = `translateX(-${MAX}px)`;
-    } else {
-      cell.style.transform = '';
-    }
+    if (Math.abs(curX) > MAX*0.5) cell.style.transform = `translateX(-${MAX}px)`;
+    else cell.style.transform = '';
   }
   cell.addEventListener('touchstart', onStart, {passive:true});
   cell.addEventListener('touchmove', onMove, {passive:false});
@@ -1057,8 +1080,8 @@ function render() {
   const pending = rows.filter(r => r.status !== 'Settled');
   const settled = rows.filter(r => r.status === 'Settled');
 
-  const inAmt  = pending.filter(r => r.type === 'Owes Me').reduce((s,r) => s+r.amount, 0);
-  const outAmt = pending.filter(r => r.type === 'I Owe').reduce((s,r) => s+r.amount, 0);
+  const inAmt  = pending.filter(r => isOwesMe(r.type)).reduce((s,r) => s+r.amount, 0);
+  const outAmt = pending.filter(r => !isOwesMe(r.type)).reduce((s,r) => s+r.amount, 0);
   const net    = inAmt - outAmt;
 
   const balEl = document.getElementById('balAmount');
@@ -1093,7 +1116,7 @@ function render() {
 }
 
 function cellHtml(r, realIdx, isSettled) {
-  const isIn = r.type === 'Owes Me';
+  const isIn = isOwesMe(r.type);
   const noteFirst = r.note ? r.note.split('|||')[0] : '';
   const subBits = [
     noteFirst,
@@ -1120,54 +1143,91 @@ function cellHtml(r, realIdx, isSettled) {
 }
 
 // ════════════════════════════
-//  NEW ENTRY
+//  ADD / EDIT SHEET
 // ════════════════════════════
 let sType = 'in';
-function openSheet() {
-  sType = 'in';
-  document.getElementById('segIn').classList.add('active');
-  document.getElementById('segOut').classList.remove('active');
-  document.getElementById('personInput').value = '';
-  document.getElementById('amtInput').value = '';
-  document.getElementById('noteInput').value = '';
-  document.getElementById('dateInput').value = todayISO();
+
+function openSheet(editIdx) {
+  if (typeof editIdx === 'number') {
+    // EDIT MODE — pre-fill from existing row
+    editingRowIdx = editIdx;
+    const r = rows[editIdx];
+    sType = isOwesMe(r.type) ? 'in' : 'out';
+    document.getElementById('personInput').value = r.person || '';
+    document.getElementById('amtInput').value = r.amount || '';
+    document.getElementById('noteInput').value = r.note || '';
+    document.getElementById('dateInput').value = toISODate(r.date);
+    document.getElementById('sheetTitle').textContent = 'Edit Entry';
+    document.getElementById('saveBtn').textContent = 'Save';
+  } else {
+    // ADD MODE
+    editingRowIdx = null;
+    sType = 'in';
+    document.getElementById('personInput').value = '';
+    document.getElementById('amtInput').value = '';
+    document.getElementById('noteInput').value = '';
+    document.getElementById('dateInput').value = todayISO();
+    document.getElementById('sheetTitle').textContent = 'New Entry';
+    document.getElementById('saveBtn').textContent = 'Add';
+  }
+  document.getElementById('segIn').classList.toggle('active', sType === 'in');
+  document.getElementById('segOut').classList.toggle('active', sType === 'out');
   document.getElementById('sheetOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  setTimeout(() => document.getElementById('personInput').focus(), 350);
+  if (editingRowIdx === null) {
+    setTimeout(() => document.getElementById('personInput').focus(), 350);
+  }
 }
 function closeSheet() {
   document.getElementById('sheetOverlay').classList.remove('open');
   document.body.style.overflow = '';
+  editingRowIdx = null;
 }
 function pickType(t) {
   sType = t;
   document.getElementById('segIn').classList.toggle('active', t === 'in');
   document.getElementById('segOut').classList.toggle('active', t === 'out');
 }
+
 async function doSave() {
-  const person = document.getElementById('personInput').value.trim();
-  const amt = parseFloat(document.getElementById('amtInput').value);
-  const note = document.getElementById('noteInput').value.trim();
+  const person  = document.getElementById('personInput').value.trim();
+  const amt     = parseFloat(document.getElementById('amtInput').value);
+  const note    = document.getElementById('noteInput').value.trim();
   const dateRaw = document.getElementById('dateInput').value || todayISO();
 
-  if (!person) { showToast('Add a name'); return; }
-  if (!amt || amt <= 0) { showToast('Add an amount'); return; }
+  if (!person)         { showToast('Add a name'); return; }
+  if (!amt || amt <=0) { showToast('Add an amount'); return; }
 
   const [y,m,d] = dateRaw.split('-');
   const sheetDate = `${m}/${d}/${y}`;
-  const typeStr = sType === 'in' ? 'Owes Me' : 'I Owe';
-  const row = {type: typeStr, person, date: sheetDate, note, amount: amt, status: 'Pending', dateSettled: ''};
+  const typeStr = canonicalType(sType);
 
-  rows.push(row);
-  flushRows(); render();
-  closeSheet();
-  showToast('Added');
-  addHistory('added', `${typeStr} — ${person} — ${$m(amt)}${note ? ' — '+note : ''}`);
-
-  if (SCRIPT_URL) {
-    const ok = await writeRow(row);
-    if (ok) syncSheet();
-    else showToast('Saved locally — sync failed');
+  if (editingRowIdx !== null) {
+    // EDIT
+    const r = rows[editingRowIdx];
+    const rowIndex = r.rowIndex;
+    r.type = typeStr; r.person = person; r.date = sheetDate; r.note = note; r.amount = amt;
+    flushRows(); render();
+    closeSheet();
+    showToast('Saved');
+    addHistory('edited', `${typeStr} — ${person} — ${$m(amt)}${note ? ' — '+note : ''}`);
+    if (SCRIPT_URL && rowIndex) {
+      const ok = await editRowOnSheet(rowIndex, r);
+      if (!ok) showToast('Saved locally — sync failed');
+    }
+  } else {
+    // ADD
+    const row = {type:typeStr, person, date:sheetDate, note, amount:amt, status:'Pending', dateSettled:''};
+    rows.push(row);
+    flushRows(); render();
+    closeSheet();
+    showToast('Added');
+    addHistory('added', `${typeStr} — ${person} — ${$m(amt)}${note ? ' — '+note : ''}`);
+    if (SCRIPT_URL) {
+      const ok = await writeRow(row);
+      if (ok) syncSheet();
+      else showToast('Saved locally — sync failed');
+    }
   }
 }
 
@@ -1188,7 +1248,6 @@ function setupSave() {
 }
 function setupSkip() { document.getElementById('setupOverlay').classList.remove('open'); }
 
-// Long-press sync chip → setup
 let pillPress;
 const syncBtn = document.getElementById('syncBtn');
 syncBtn.addEventListener('contextmenu', e => { e.preventDefault(); openSetup(); });
