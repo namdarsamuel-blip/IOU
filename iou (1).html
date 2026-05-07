@@ -388,6 +388,19 @@ body {
 .card.light .card-title { color: var(--label); }
 .card.dark  .card-title { color: var(--black-card-label); }
 
+.card-note {
+  font-size: 15px; font-weight: 500;
+  letter-spacing: -0.24px; line-height: 1.3;
+  margin-bottom: 5px;
+  overflow: hidden; text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.card.light .card-note { color: var(--label); }
+.card.dark  .card-note { color: rgba(255,255,255,0.96); }
+.card.completed .card-note { opacity: 0.55; text-decoration: line-through; text-decoration-thickness: 1px; }
+
 .card-sub {
   font-size: 13.5px; font-weight: 400;
   letter-spacing: -0.15px; line-height: 1.3;
@@ -1746,8 +1759,10 @@ function renderDashboard(pending) {
 
   let netClass = 'zero';
   let netLabel = 'You\'re even';
-  if (net > 0) { netClass = 'pos'; netLabel = 'Owed to you, net'; }
-  else if (net < 0) { netClass = 'neg'; netLabel = 'You owe, net'; }
+  // Color logic matches cards: red = money you don't have / are missing,
+  //                            green = money still in your pocket.
+  if (net > 0) { netClass = 'neg'; netLabel = 'Owed to you, net'; }
+  else if (net < 0) { netClass = 'pos'; netLabel = 'You owe, net'; }
 
   const netSign = net < 0 ? '−' : (net > 0 ? '+' : '');
 
@@ -1765,7 +1780,7 @@ function renderDashboard(pending) {
     const bNet = businessPending.filter(r => isOwesMe(r.type)).reduce((s,r)=>s+r.amount,0)
                - businessPending.filter(r => !isOwesMe(r.type)).reduce((s,r)=>s+r.amount,0);
     const fmtNet = (n) => (n < 0 ? '−' : n > 0 ? '+' : '') + $m(Math.abs(n));
-    const colorOf = (n) => n > 0 ? 'var(--green)' : n < 0 ? 'var(--red)' : 'var(--label)';
+    const colorOf = (n) => n > 0 ? 'var(--red)' : n < 0 ? 'var(--green)' : 'var(--label)';
     const rows = [];
     if (personalPending.length) {
       rows.push(`<div class="dash-cat-row">
@@ -1937,10 +1952,13 @@ function cardHtml(r, realIdx, isCompletedCard) {
   const statusPill  = isCompletedCard ? statusPillHtml(r) : '';
   const methodLabel = (r.method && !isDeleted(r)) ? (methodById(r.method)?.label || '') : '';
 
-  // Build subtitle parts: pills first (status + source), then text (note · method · date)
+  // Note has its own prominent line above the metadata
+  const noteHtml = note ? `<div class="card-note">${escapeHtml(note)}</div>` : '';
+
+  // Subtitle: pills then text bits (method · date), joined with ·
+  // Show method on paid cards too — useful context (e.g., "Paid · Venmo · Today")
   const textParts = [];
-  if (note) textParts.push(`<span class="text-bit">${escapeHtml(note)}</span>`);
-  if (methodLabel && !isCompletedCard) textParts.push(`<span class="text-bit">${escapeHtml(methodLabel)}</span>`);
+  if (methodLabel) textParts.push(`<span class="text-bit">${escapeHtml(methodLabel)}</span>`);
   if (dateText) textParts.push(`<span class="text-bit">${escapeHtml(dateText)}</span>`);
   const textJoined = textParts.join(`<span class="text-bit" style="opacity:0.5;">·</span>`);
 
@@ -1956,6 +1974,7 @@ function cardHtml(r, realIdx, isCompletedCard) {
       <div class="avatar" style="background:${avatarColor(r.person)}">${initials(r.person)}</div>
       <div class="card-text">
         <div class="card-title">${escapeHtml(r.person)}</div>
+        ${noteHtml}
         <div class="card-sub">${statusPill}${sourcePill}${textJoined}</div>
       </div>
       <div class="card-right">
